@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -62,9 +63,20 @@ class MainActivity : AppCompatActivity() {
          //responsible for rendering out each row
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-      val textView = TextView(mContext) //return view for individual row
-             textView.text = "Here is my row for my text view"
-             return textView
+//      val textView = TextView(mContext) //return view for individual row
+//             textView.text = "Here is my row for my text view"
+//             return textView
+
+             //instead of above we used the row xml layout
+             //we use layout inflator
+
+             val layoutInflater = LayoutInflater.from(mContext)
+             val rowMain =  layoutInflater.inflate(R.layout.row_main, parent, false)
+
+             val positionTextView = rowMain.findViewById<TextView>()[R.id.position_textview]
+             positionTextView.text = "ROW NUMBER: $position"
+
+             return  rowMain
 
 
         }
